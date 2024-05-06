@@ -1,9 +1,14 @@
 import { useState, useEffect } from "react";
 
-function useFetchCategories(relativeUrl: string) {
+interface FetchError {
+  message: string;
+  status?: number;
+}
+
+function useFetchData(relativeUrl: string) {
   const [data, setData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<FetchError | null>(null);
 
   const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
   const fullUrl = `${apiBaseUrl}${relativeUrl}`;
@@ -16,13 +21,19 @@ function useFetchCategories(relativeUrl: string) {
         const response = await fetch(fullUrl);
 
         if (!response.ok) {
-          throw new Error(`Failed to fetch data: ${response.statusText}`);
+          throw {
+            message: `Failed to fetch data: ${response.statusText}`,
+            status: response.status,
+          };
         }
 
         const jsonData = await response.json();
         setData(jsonData);
       } catch (error: any) {
-        setError(error.message || "Unknown error");
+        setError({
+          message: error.message || "Unknown error",
+          status: error.status || undefined,
+        });
       } finally {
         setIsLoading(false);
       }
@@ -34,4 +45,4 @@ function useFetchCategories(relativeUrl: string) {
   return { data, isLoading, error };
 }
 
-export default useFetchCategories;
+export default useFetchData;
