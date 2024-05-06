@@ -10,7 +10,7 @@ function useFetchData(relativeUrl: string) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<FetchError | null>(null);
 
-  const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
   const fullUrl = `${apiBaseUrl}${relativeUrl}`;
 
   useEffect(() => {

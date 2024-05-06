@@ -4,7 +4,7 @@ const useSubmitForm = (relativeUrl: string) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL;
   const fullUrl = `${apiBaseUrl}${relativeUrl}`;
 
   const submitForm = async (data: Record<string, any>, method: string = "POST") => {
