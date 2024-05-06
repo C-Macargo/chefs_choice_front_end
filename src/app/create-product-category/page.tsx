@@ -3,9 +3,9 @@
 import { FormEvent, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import useFetchCategories from "@/hooks/useFetchCategories";
 import FormInput from "./components/FormInput";
 import useSubmitForm from "@/hooks/useSubmitForm";
+import useFetchData from "@/hooks/useFetchData";
 
 export default function CreateProductCategoryPage(): JSX.Element {
   const [mode, setMode] = useState<"category" | "product">("category");
@@ -16,7 +16,7 @@ export default function CreateProductCategoryPage(): JSX.Element {
   const [price, setPrice] = useState<string>("");
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const { isLoading: submitting, error: submitError, submitForm } = useSubmitForm(`${mode === "category" ? "/category" : "/product"}`);
-  const { data: categories, isLoading: fetching, error: fetchError } = useFetchCategories("/category");
+  const { data: categories, isLoading: fetching, error: fetchError } = useFetchData("/category");
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
