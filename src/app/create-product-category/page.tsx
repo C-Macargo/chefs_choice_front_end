@@ -142,7 +142,7 @@ export default function CreateProductCategoryPage(): JSX.Element {
             {fetching ? (
               <p>Loading categories...</p>
             ) : fetchError ? (
-              <p className="text-red-500">Error: {fetchError}</p>
+              <p className="text-red-500">Error: {fetchError.message}</p>
             ) : (
               <select
                 id="productCategory"
