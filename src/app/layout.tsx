@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"] });
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} items-center min-h-screen bg-gradient-to-br from-sky-50 to-gray-200`}>
+      <body className={`${inter.className} items-center min-h-screen  bg-white dark:bg-gray-800 `}>
       <ToastContainer />
         <NavMenu />
         <main className="container mx-auto">
